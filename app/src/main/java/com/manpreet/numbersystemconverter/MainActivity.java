@@ -10,29 +10,43 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText inputField;
+    EditText inputDecimal, inputBinary;
     TextView output;
-    Button convert;
+    Button convertToDecimal, convertToBinary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        inputField = findViewById(R.id.input_field);
+        inputDecimal = findViewById(R.id.input_decimal);
+        inputBinary = findViewById(R.id.input_binary);
         output = findViewById(R.id.output);
-        convert = findViewById(R.id.button_convert);
+        convertToBinary = findViewById(R.id.convert_to_binary);
+        convertToDecimal = findViewById(R.id.comvert_to_decimal);
 
-        convert.setOnClickListener(new View.OnClickListener() {
+        convertToBinary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 convertToBinary();
             }
         });
+
+        convertToDecimal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                convertToDecimal();
+            }
+        });
+    }
+
+    private void convertToDecimal() {
+        int decimal = Integer.parseInt(inputBinary.getText().toString(), 2);
+        output.setText(String.valueOf(decimal));
     }
 
     private void convertToBinary() {
-        int decimal = Integer.parseInt(inputField.getText().toString());
+        int decimal = Integer.parseInt(inputDecimal.getText().toString());
         String binary = Integer.toBinaryString(decimal);
         output.setText(binary);
     }
